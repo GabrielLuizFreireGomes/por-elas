@@ -1,0 +1,13 @@
+---
+import { instagram } from '../lib/por-elas';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+<a class:list={['texto-link', 'social-instagram', { 'social-instagram--compact': compact }]} href={instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram da Por Elas">
+  <span class="icone icone-instagram" aria-hidden="true"></span>
+  {!compact && <span>Instagram</span>}
+</a>

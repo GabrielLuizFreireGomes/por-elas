@@ -1,0 +1,17 @@
+{
+  "name": "por-elas-conceito-em-beleza",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "7.4.10",
+    "embla-carousel": "8.6.0"
+  }
+}

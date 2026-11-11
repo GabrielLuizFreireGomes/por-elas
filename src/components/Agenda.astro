@@ -1,0 +1,19 @@
+---
+import { messages, whatsapp } from '../lib/por-elas';
+
+interface Props {
+  label: string;
+  intent?: keyof typeof messages;
+  tone?: 'gold' | 'dark' | 'outline' | 'whatsapp';
+  class?: string;
+  id?: string;
+  iconOnly?: boolean;
+  accessibleLabel?: string;
+}
+
+const { label, intent = 'general', tone = 'gold', class: className, id, iconOnly = false, accessibleLabel } = Astro.props;
+---
+<a id={id} class:list={['acao', `acao--${tone}`, className]} href={whatsapp(messages[intent])} target="_blank" rel="noopener noreferrer" aria-label={accessibleLabel ?? (iconOnly ? label : undefined)} title={iconOnly ? label : undefined}>
+  <span class="icone icone-whatsapp" aria-hidden="true"></span>
+  {!iconOnly && <span>{label}</span>}
+</a>

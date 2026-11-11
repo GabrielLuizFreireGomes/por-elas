@@ -1,0 +1,187 @@
+---
+import Agenda from '../components/Agenda.astro';
+import Instagram from '../components/Instagram.astro';
+import Marca from '../components/Marca.astro';
+import { gallery, location, media } from '../lib/por-elas';
+import '../styles/site.css';
+
+const canonical = Astro.site && new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171715" />
+    <title>Por Elas Conceito em Beleza | Jardim América, São José dos Campos</title>
+    <meta name="description" content="Manicure, spa dos pés, cabelo, sobrancelhas e estética no Jardim América. Conheça a Por Elas e peça seu horário pelo WhatsApp." />
+    <meta property="og:title" content="Por Elas Conceito em Beleza" />
+    <meta property="og:description" content="Um espaço para cuidar de unhas, cabelo, sobrancelhas e estética, no Jardim América, em São José dos Campos." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {canonical && <meta property="og:url" content={canonical.href} />}
+    <link rel="icon" href={`${media}por-elas-simbolo.svg`} type="image/svg+xml" />
+    <link rel="preload" href={`${media}instrument-serif.woff2`} as="font" type="font/woff2" crossorigin="anonymous" />
+  </head>
+  <body>
+    <a class="pular" href="#conteudo">Ir para o conteúdo</a>
+    <header class="topo" id="inicio">
+      <div class="limite topo-inner">
+        <Marca />
+        <span class="topo-fio" aria-hidden="true"></span>
+        <div class="topo-acoes">
+          <Instagram compact />
+          <Agenda label="Agendar" tone="outline" class="topo-agenda" accessibleLabel="Agendar pelo WhatsApp" />
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="hero" aria-labelledby="hero-titulo">
+        <div class="limite hero-grid">
+          <div class="hero-texto">
+            <h1 id="hero-titulo"><span>Um momento</span><br />só seu.</h1>
+            <p>Unhas, cabelo, sobrancelhas e estética em São José dos Campos.</p>
+            <Agenda id="agenda-hero" label="Agendar no WhatsApp" />
+          </div>
+          <div class="hero-fotos" aria-label="Trabalhos da Por Elas">
+            <div class="hero-retrato">
+              <img
+                src={`${media}corte.webp`}
+                srcset={`${media}corte-mobile.webp 520w, ${media}corte.webp 960w`}
+                sizes="(max-width: 800px) 77vw, 41vw"
+                width="960"
+                height="1171"
+                alt="Corte curto escuro feito na Por Elas"
+                fetchpriority="high"
+              />
+            </div>
+            <div class="hero-detalhe">
+              <img src={`${media}vermelho-flores.webp`} width="650" height="650" alt="Manicure vermelha da Por Elas fotografada junto a flores" decoding="async" />
+            </div>
+            <svg class="contorno-hero" viewBox="0 0 650 590" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path pathLength="1" d="M23 523C-12 365 11 137 142 51C263-28 459 4 525 117C584 220 479 300 536 391C558 427 599 452 633 464" />
+              <path class="contorno-folha" d="M538 393C567 377 588 383 608 404C577 419 554 416 538 393Z" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="maos" id="cuidados" aria-labelledby="maos-titulo">
+        <div class="limite maos-intro">
+          <div>
+            <h2 id="maos-titulo">Mãos e pés</h2>
+            <p>Manicure e spa dos pés.</p>
+          </div>
+          <Agenda label="Agendar" intent="hands" tone="dark" accessibleLabel="Agendar manicure ou spa dos pés pelo WhatsApp" />
+        </div>
+        <div class="limite galeria" data-gallery role="group" aria-roledescription="carrossel" aria-label="Manicures da Por Elas">
+          <div class="galeria-viewport" id="trabalhos" tabindex="0" role="group" aria-label="Fotos de manicure">
+            <ul class="galeria-trilha">
+              {gallery.map((photo) => (
+                <li class="galeria-slide">
+                  <div class="foto-janela"><img src={`${media}${photo.image}`} width={photo.width} height={photo.height} alt={photo.alt} loading="lazy" decoding="async" draggable="false" /></div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="galeria-controles" data-gallery-controls hidden>
+            <button type="button" data-previous aria-controls="trabalhos" aria-label="Foto anterior">
+              <svg class="chevron chevron--anterior" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m7.5 4.5 5 5.5-5 5.5" /></svg>
+            </button>
+            <button type="button" data-next aria-controls="trabalhos" aria-label="Próxima foto">
+              <svg class="chevron" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m7.5 4.5 5 5.5-5 5.5" /></svg>
+            </button>
+          </div>
+          <Instagram />
+          <div class="galeria-progresso" data-progress aria-hidden="true" hidden><span></span></div>
+          <span class="sr-only" data-gallery-status aria-live="polite"></span>
+        </div>
+      </section>
+
+      <section class="cabelo" id="cabelo" aria-labelledby="cabelo-titulo">
+        <div class="limite cabelo-grid">
+          <div class="cabelo-fotos">
+            <figure class="cabelo-foto" data-reveal>
+              <img src={`${media}cabelo-atelier.webp`} width="540" height="960" alt="Cabelo com mechas em tons de caramelo e cobre na Por Elas" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="olhar-foto" data-reveal>
+              <img src={`${media}olhar.webp`} width="640" height="833" alt="Design de sobrancelhas com henna apresentado no perfil da Por Elas" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+          <div class="cabelo-texto">
+            <h2 id="cabelo-titulo">Cabelo e<br />sobrancelhas</h2>
+            <p>Cortes, mechas e design de sobrancelhas.</p>
+            <Agenda label="Agendar" intent="hair" accessibleLabel="Agendar cabelo ou sobrancelhas pelo WhatsApp" />
+          </div>
+        </div>
+      </section>
+
+      <section class="ofertas" id="ofertas" aria-labelledby="ofertas-titulo">
+        <div class="limite">
+          <h2 id="ofertas-titulo">Ofertas de estética</h2>
+          <div class="ofertas-grid">
+            <article class="facial" aria-labelledby="facial-titulo">
+              <figure data-reveal>
+                <img src={`${media}facial.webp`} width="600" height="988" alt="Aplicação de produto com pincel durante atendimento facial" loading="lazy" decoding="async" />
+              </figure>
+              <div class="facial-texto">
+                <h3 id="facial-titulo">Black Facial</h3>
+                <p>Limpeza, extração de cravos, alta frequência e hidratação.</p>
+                <div class="preco"><span>De <s>R$ 199,90</s></span><strong>R$ 149,90</strong></div>
+                <p class="condicao">Sem taxa no crédito.</p>
+                <Agenda label="Agendar" intent="facial" accessibleLabel="Agendar Black Facial pelo WhatsApp" />
+              </div>
+            </article>
+            <article class="massagem" aria-labelledby="massagem-titulo">
+              <div class="massagem-info">
+                <p class="condicao">Condição de verão</p>
+                <h3 id="massagem-titulo">Massagem redutora</h3>
+              </div>
+              <div class="massagem-pacote">
+                <p><strong>5 sessões + 1 de presente</strong></p>
+                <p class="massagem-preco"><strong>4× de R$&nbsp;127,50</strong><span>no cartão de crédito</span></p>
+                <Agenda label="Consultar pacote" intent="massage" tone="dark" accessibleLabel="Consultar pacote de massagem pelo WhatsApp" />
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="visita" id="visita" aria-labelledby="visita-titulo">
+        <div class="limite visita-grid">
+          <div class="visita-texto">
+            <h2 id="visita-titulo">Visite a Por Elas</h2>
+            <address>Mar Del Plata, 358<br />Jardim América, São José dos Campos–SP</address>
+            <p>Atendimento com hora marcada.</p>
+            <div class="visita-acoes">
+              <Agenda id="agenda-final" label="Agendar" accessibleLabel="Agendar pelo WhatsApp" />
+              <a class="texto-link rota" href={location} target="_blank" rel="noopener noreferrer" aria-label="Rota no Google Maps"><span class="icone icone-rota" aria-hidden="true"></span><span>Rota</span></a>
+            </div>
+          </div>
+          <div class="visita-fotos">
+            <figure class="visita-foto" data-reveal>
+              <img src={`${media}fachada.webp`} width="640" height="1136" alt="Letreiro dourado da Por Elas na entrada do salão" loading="lazy" decoding="async" />
+            </figure>
+            <figure class="visita-detalhe" data-reveal>
+              <img src={`${media}rotina.webp`} width="640" height="1138" alt="Bandeja dourada, flores e copos na rotina da Por Elas" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <div class="limite rodape-inner">
+        <Marca />
+        <Instagram />
+      </div>
+    </footer>
+    <Agenda label="Conversar pelo WhatsApp" class="agenda-flutuante" tone="whatsapp" iconOnly />
+    <div class="efeito-ponteiro" aria-hidden="true"></div>
+    <script>
+      import '../scripts/movimento';
+    </script>
+  </body>
+</html>
